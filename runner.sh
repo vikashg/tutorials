@@ -450,7 +450,7 @@ function replace_text {
 }
 
 # Get notebooks (pattern is an empty string unless the user specifies otherwise)
-files=($(echo "$pattern" | xargs find . -type f -name "*.ipynb" -and ! -wholename "*.ipynb_checkpoints*"))
+mapfile -t files < <(echo "$pattern" | xargs find . -type f -name "*.ipynb" -and ! -wholename "*.ipynb_checkpoints*")
 if [[ $files == "" ]]; then
     print_error_msg "No files match pattern"
     exit 0
